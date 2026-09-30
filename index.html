@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeTrack</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>LifeTrack</h1>
+            <p class="date" id="currentDate"></p>
+        </header>
+
+        <nav>
+            <button class="tab-btn active" onclick="showTab('sleep')">Sleep</button>
+            <button class="tab-btn" onclick="showTab('gym')">Gym</button>
+            <button class="tab-btn" onclick="showTab('habits')">Habits</button>
+            <button class="tab-btn" onclick="showTab('summary')">Summary</button>
+        </nav>
+
+        <!-- Sleep Tab -->
+        <div class="tab active" id="sleep">
+            <h2>Sleep Tracker</h2>
+            <div class="card">
+                <label>Bedtime</label>
+                <input type="time" id="bedtime">
+                <label>Wake Up</label>
+                <input type="time" id="waketime">
+                <button class="btn" onclick="calculateSleep()">Log Sleep</button>
+                <div class="result" id="sleepResult"></div>
+            </div>
+            <div class="history" id="sleepHistory"></div>
+        </div>
+
+        <!-- Gym Tab -->
+        <div class="tab" id="gym">
+            <h2>Gym Tracker</h2>
+            <div class="card">
+                <label>Workout Type</label>
+                <select id="workoutType">
+                    <option>Push (Chest/Shoulders/Tris)</option>
+                    <option>Pull (Back/Bis)</option>
+                    <option>Legs</option>
+                    <option>Cardio</option>
+                    <option>Full Body</option>
+                </select>
+                <label>Duration (minutes)</label>
+                <input type="number" id="workoutDuration" placeholder="60">
+                <label>Notes</label>
+                <input type="text" id="workoutNotes" placeholder="PR on bench, felt strong...">
+                <button class="btn" onclick="logWorkout()">Log Workout</button>
+            </div>
+            <div class="history" id="gymHistory"></div>
+        </div>
+
+        <!-- Habits Tab -->
+        <div class="tab" id="habits">
+            <h2>Daily Habits</h2>
+            <div class="card">
+                <div class="habit-list">
+                    <div class="habit-item">
+                        <input type="checkbox" id="h1">
+                        <label for="h1">Drank 1 gallon of water</label>
+                    </div>
+                    <div class="habit-item">
+                        <input type="checkbox" id="h2">
+                        <label for="h2">Hit protein goal</label>
+                    </div>
+                    <div class="habit-item">
+                        <input type="checkbox" id="h3">
+                        <label for="h3">Worked out</label>
+                    </div>
+                    <div class="habit-item">
+                        <input type="checkbox" id="h4">
+                        <label for="h4">Read 10 pages</label>
+                    </div>
+                    <div class="habit-item">
+                        <input type="checkbox" id="h5">
+                        <label for="h5">Outside walk / 45 min cardio</label>
+                    </div>
+                    <div class="habit-item">
+                        <input type="checkbox" id="h6">
+                        <label for="h6">No alcohol</label>
+                    </div>
+                    <div class="habit-item">
+                        <input type="checkbox" id="h7">
+                        <label for="h7">Morning scripture / prayer</label>
+                    </div>
+                    <div class="habit-item">
+                        <input type="checkbox" id="h8">
+                        <label for="h8">Followed meal prep plan</label>
+                    </div>
+                </div>
+                <button class="btn" onclick="logHabits()">Save Habits</button>
+                <div class="result" id="habitResult"></div>
+            </div>
+        </div>
+
+        <!-- Summary Tab -->
+        <div class="tab" id="summary">
+            <h2>Today's Summary</h2>
+            <div class="card">
+                <div class="summary-grid">
+                    <div class="summary-box">
+                        <div class="summary-label">Sleep</div>
+                        <div class="summary-value" id="sumSleep">--</div>
+                    </div>
+                    <div class="summary-box">
+                        <div class="summary-label">Workout</div>
+                        <div class="summary-value" id="sumWorkout">--</div>
+                    </div>
+                    <div class="summary-box">
+                        <div class="summary-label">Habits</div>
+                        <div class="summary-value" id="sumHabits">--</div>
+                    </div>
+                    <div class="summary-box">
+                        <div class="summary-label">Day Score</div>
+                        <div class="summary-value" id="sumScore">--</div>
+                    </div>
+                </div>
+                <button class="btn" onclick="generateSummary()">Refresh Summary</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
