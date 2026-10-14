@@ -1,3 +1,25 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDRcY93TEFdytiJOmqfYClmyjGsRpF-Dj8",
+  authDomain: "fitnessapp-f42d6.firebaseapp.com",
+  projectId: "fitnessapp-f42d6",
+  storageBucket: "fitnessapp-f42d6.firebasestorage.app",
+  messagingSenderId: "400358243459",
+  appId: "1:400358243459:web:b671e2fc27ba51e6226fb6",
+  measurementId: "G-SM18SRKV9V"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 // Set current date
 document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', {
     weekday: 'long', month: 'long', day: 'numeric'
@@ -56,6 +78,18 @@ function logWorkout() {
 
     const entry = { type, duration, notes, time: new Date().toLocaleTimeString() }
     gymLog.unshift(entry)
+    db.collection("workouts").add({
+    type: type,
+    duration: Number(duration),
+    notes: notes,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+})
+.then(() => {
+    console.log("Workout saved to Firestore");
+})
+.catch((error) => {
+    console.error("Workout save failed:", error);
+});
     updateGymHistory()
     localStorage.setItem('workoutLogged', 'yes')
     localStorage.setItem('workoutType', type)
